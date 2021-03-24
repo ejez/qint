@@ -1,0 +1,22 @@
+{
+  "name": "@ejez/quasar-app-extension-qint",
+  "version": "0.0.1",
+  "description": "A Quasar app extension to add internationalization support.",
+  "author": "Ejez <ejez@protonmail.ch>",
+  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ejez/qint"
+  },
+  "bugs": "https://github.com/ejez/qint/issues",
+  "homepage": "https://github.com/ejez/qint",
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0",
+    "yarn": ">= 1.6.0"
+  }
+}
