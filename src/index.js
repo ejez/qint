@@ -12,6 +12,6 @@ module.exports = function (api) {
 
   // Add a webpack resolve alias for the extension.
   api.extendWebpack((cfg) => {
-    cfg.resolve.alias.qint = path.resolve(__dirname)
+    cfg.resolve.alias.qint = path.resolve(__dirname, 'lib')
   })
 }
