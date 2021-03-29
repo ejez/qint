@@ -10,8 +10,8 @@ module.exports = function (api) {
     conf.build.transpileDependencies.push(/quasar-app-extension-qint[\\/]src/)
   })
 
-  // Add a webpack resolve alias for the extension.
   api.extendWebpack((cfg) => {
+    // Add a webpack resolve alias for the extension.
     cfg.resolve.alias.qint = path.resolve(__dirname, 'lib')
   })
 }

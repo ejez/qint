@@ -1,6 +1,6 @@
 import type { QSsrContext } from '@quasar/app'
-import type { QintImportQLangFn, QintLangTagConf } from './types'
 import { Quasar } from 'quasar'
+import type { QintImportQLangFn, QintLangTagConf } from './types'
 
 export async function setQLang({
   langTag,
@@ -19,7 +19,6 @@ export async function setQLang({
   const custom = langTagConf?.quasarLang?.custom
 
   try {
-    // Import the language pack.
     const qLang = await importQLang(isoName, custom)
 
     // Set the language pack.

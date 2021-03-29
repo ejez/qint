@@ -1,15 +1,15 @@
+import type { Cookies, QuasarLanguage } from 'quasar'
 import 'quasar/dist/types/feature-flag'
 import type {
-  ComposerOptions,
-  VueI18nOptions,
-  LocaleMessageDictionary,
-  VueMessageType,
-  createI18n,
+    ComposerOptions,
+    I18n,
+    LocaleMessageDictionary,
+    VueI18nOptions,
+    VueMessageType
 } from 'vue-i18n'
-import type { Cookies } from 'quasar'
-import type { QuasarLanguage } from 'quasar'
 
 interface QintLangTagConf {
+  nativeName?: string
   quasarLang?: {
     isoName?: string
     custom?: boolean
@@ -61,7 +61,7 @@ interface QintConf {
 
 type QintCookieOptions = Parameters<typeof Cookies.set>[2]
 
-type QintI18n = ReturnType<typeof createI18n>
+type QintI18n = I18n<unknown, unknown, unknown, boolean>
 
 declare module 'quasar/dist/types/feature-flag' {
   interface QuasarFeatureFlags {

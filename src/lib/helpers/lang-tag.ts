@@ -4,8 +4,8 @@ import { cookies } from './cookies'
 export function getLangTag(
   {
     langTags,
-    useCookie = false,
     urlPath,
+    useCookie = false,
     ssrContext,
   }: {
     langTags: string[]
