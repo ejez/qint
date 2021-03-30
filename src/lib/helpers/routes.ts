@@ -15,36 +15,61 @@ export function localizePathSegments({
   return encodeURI(
     path
       .split('/')
-      .map((segment) =>
-        i18n.t(`ps.${segment}`, segment, { locale: langTag })
-      )
+      .map((segment) => i18n.t(`ps.${segment}`, segment, { locale: langTag }))
       .join('/')
   )
 }
 
-export function overrideRoute({
+export function assignToRoute({
   routes,
-  routeName,
+  targetName,
+  source,
+}: {
+  routes: RouteRecordRaw[]
+  targetName: string
+  source: Partial<RouteRecordRaw>
+}) {
+  const targetIndex = routes.findIndex((route) => route.name === targetName)
+  Object.assign(routes[targetIndex], source)
+  return routes
+}
+
+export function assignToRoutes({
+  routes,
+  assignments,
+}: {
+  routes: RouteRecordRaw[]
+  assignments: { [targetName: string]: Partial<RouteRecordRaw> }
+}) {
+  for (const [targetName, source] of Object.entries(assignments)) {
+    assignToRoute({ routes, targetName, source })
+  }
+  return routes
+}
+
+export function replaceRoute({
+  routes,
+  oldRouteName,
   newRoute,
 }: {
   routes: RouteRecordRaw[]
-  routeName: string
+  oldRouteName: string
   newRoute: RouteRecordRaw
 }) {
-  const routeIndex = routes.findIndex((route) => route.name === routeName)
+  const routeIndex = routes.findIndex((route) => route.name === oldRouteName)
   routes[routeIndex] = newRoute
   return routes
 }
 
-export function overrideRoutes({
+export function replaceRoutes({
   routes,
-  newRoutes,
+  replacements,
 }: {
   routes: RouteRecordRaw[]
-  newRoutes: { [routeName: string]: RouteRecordRaw }
+  replacements: { [oldRouteName: string]: RouteRecordRaw }
 }) {
-  for (const [routeName, newRoute] of Object.entries(newRoutes)) {
-    overrideRoute({ routes, routeName, newRoute })
+  for (const [oldRouteName, newRoute] of Object.entries(replacements)) {
+    replaceRoute({ routes, oldRouteName, newRoute })
   }
   return routes
 }
