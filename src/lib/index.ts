@@ -50,10 +50,10 @@ export async function setAppLangTag({
   await loadVueI18nGeneralMsgPromise
   await setQLangPromise
 
-  if (typeof i18n.global.locale === 'string') {
-    i18n.global.locale = langTag
+  if (typeof i18n.locale === 'string') {
+    i18n.locale = langTag
   } else {
-    i18n.global.locale.value = langTag
+    i18n.locale.value = langTag
   }
 
   if (useCookie) {

@@ -16,7 +16,7 @@ export function localizePathSegments({
     path
       .split('/')
       .map((segment) =>
-        i18n.global.t(`ps.${segment}`, segment, { locale: langTag })
+        i18n.t(`ps.${segment}`, segment, { locale: langTag })
       )
       .join('/')
   )

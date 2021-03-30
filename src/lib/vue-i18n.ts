@@ -12,7 +12,7 @@ export async function loadVueI18nMsg({
   try {
     const msg = await importMsgFn(langTag)
 
-    i18n.global.mergeLocaleMessage(langTag, msg)
+    i18n.mergeLocaleMessage(langTag, msg)
   } catch (err) {
     console.error(
       `[qint] Error loading Vue I18n message for the "${langTag}" language tag,

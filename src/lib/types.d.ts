@@ -61,7 +61,7 @@ interface QintConf {
 
 type QintCookieOptions = Parameters<typeof Cookies.set>[2]
 
-type QintI18n = I18n<unknown, unknown, unknown, boolean>
+type QintI18n = I18n<unknown, unknown, unknown, boolean>['global']
 
 declare module 'quasar/dist/types/feature-flag' {
   interface QuasarFeatureFlags {
