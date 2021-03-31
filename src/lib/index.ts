@@ -2,12 +2,13 @@ import type { QSsrContext } from '@quasar/app'
 import { cookies } from './helpers'
 import { setQLang } from './quasar-lang'
 import type {
-    QintCookieOptions, QintI18n, QintImportQLangFn,
+    QintCookieOptions,
+    QintI18n,
+    QintImportQLangFn,
     QintImportVueI18nMsgFn,
     QintLangTagConf
 } from './types'
 import { loadVueI18nMsg } from './vue-i18n'
-
 
 export * from './helpers'
 export * from './quasar-lang'
@@ -17,7 +18,7 @@ export async function setAppLangTag({
   langTag,
   langTagConf,
   i18n,
-  importVueI18nGeneralMsg,
+  importVueI18nMsgFn,
   importQLang,
   useCookie,
   langTagCookieOptions,
@@ -26,16 +27,16 @@ export async function setAppLangTag({
   langTag: string
   langTagConf?: QintLangTagConf
   i18n: QintI18n
-  importVueI18nGeneralMsg: QintImportVueI18nMsgFn
+  importVueI18nMsgFn: QintImportVueI18nMsgFn
   importQLang: QintImportQLangFn
   useCookie?: boolean
   langTagCookieOptions?: QintCookieOptions
   ssrContext?: QSsrContext | null
 }) {
-  const loadVueI18nGeneralMsgPromise = loadVueI18nMsg({
+  const loadVueI18nMsgPromise = loadVueI18nMsg({
     langTag,
     i18n,
-    importMsgFn: importVueI18nGeneralMsg,
+    importMsgFn: importVueI18nMsgFn,
   })
 
   // Load and set the language pack corresponding to `langTag`.
@@ -47,7 +48,7 @@ export async function setAppLangTag({
   })
 
   // Await promises.
-  await loadVueI18nGeneralMsgPromise
+  await loadVueI18nMsgPromise
   await setQLangPromise
 
   if (typeof i18n.locale === 'string') {
