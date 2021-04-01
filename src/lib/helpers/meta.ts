@@ -46,9 +46,11 @@ export function createHreflangRouteMeta({
   link['herflang-x-default'] = {
     rel: 'alternate',
     hreflang: 'x-default',
-    href: `https://${host}/${xDefaultLangTag}${
-      path ? '/' + xDefaultLocalizedPath : ''
-    }`,
+    href:
+      `https://${host}/` +
+      (process.env.VUE_ROUTER_MODE === 'hash' ? '#/' : '') +
+      xDefaultLangTag +
+      (path ? '/' + xDefaultLocalizedPath : ''),
   }
 
   langTags.forEach((langTag) => {
@@ -58,7 +60,11 @@ export function createHreflangRouteMeta({
     link[`hreflang-${hreflang}`] = {
       rel: 'alternate',
       hreflang,
-      href: `https://${host}/${langTag}${path ? '/' + localizedPath : ''}`,
+      href:
+        `https://${host}/` +
+        (process.env.VUE_ROUTER_MODE === 'hash' ? '#/' : '') +
+        langTag +
+        (path ? '/' + localizedPath : ''),
     }
   })
 
