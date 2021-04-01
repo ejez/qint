@@ -1,3 +1,4 @@
 export * from './cookies'
-export * from './lang-tag'
+export * from './meta'
+export * from './misc'
 export * from './routes'

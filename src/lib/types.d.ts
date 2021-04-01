@@ -1,5 +1,5 @@
 import type { Cookies, QuasarLanguage } from 'quasar'
-import 'quasar/dist/types/feature-flag'
+import type { MetaOptions } from 'quasar/dist/types/meta'
 import type {
     ComposerOptions,
     I18n,
@@ -10,6 +10,7 @@ import type {
 
 interface QintLangTagConf {
   nativeName?: string
+  hreflang?: string
   quasarLang?: {
     isoName?: string
     custom?: boolean
@@ -66,5 +67,11 @@ type QintI18n = I18n<unknown, unknown, unknown, boolean>['global']
 declare module 'quasar/dist/types/feature-flag' {
   interface QuasarFeatureFlags {
     ssr: true
+  }
+}
+
+declare module 'vue-router' {
+  interface RouteMeta {
+    appMeta?: MetaOptions
   }
 }
