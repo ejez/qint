@@ -56,7 +56,11 @@ export default defineComponent({
       await router.push(
         currentRouteRecord?.meta?.appMeta?.link?.[
           `hreflang-${hreflang}`
-        ]?.href?.replace(`https://${host}`, '') || `/${langTag}`
+        ]?.href?.replace(
+          `https://${host}` +
+            (process.env.VUE_ROUTER_MODE === 'hash' ? '/#' : ''),
+          ''
+        ) || `/${langTag}`
       )
     })
 
