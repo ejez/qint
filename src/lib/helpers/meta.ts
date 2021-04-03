@@ -1,19 +1,15 @@
 import type { QSsrContext } from '@quasar/app'
 import type { MetaOptions, MetaTagOptions } from 'quasar/dist/types/meta'
 import type { RouteLocationNormalizedLoaded } from 'vue-router'
-import { getHost, localizePathSegments } from '..'
+import { getHost, localizeRoutePathSegments } from '..'
 import type { QintI18n, QintLangTagsConf } from '../types'
 
 export function getAppMeta(route: RouteLocationNormalizedLoaded): MetaOptions {
-  if (route) {
-    const currentRouteRecord = route.matched.find(
-      (routeRecord) => routeRecord.name === route.name
-    )
+  const currentRouteRecord = route?.matched.find(
+    (routeRecord) => routeRecord.name === route.name
+  )
 
-    return currentRouteRecord?.meta?.appMeta || {}
-  }
-
-  return {}
+  return currentRouteRecord?.meta?.appMeta || {}
 }
 
 export function createHreflangRouteMeta({
@@ -37,7 +33,7 @@ export function createHreflangRouteMeta({
 
   const host = getHost(ssrContext)
 
-  const xDefaultLocalizedPath = localizePathSegments({
+  const xDefaultLocalizedPath = localizeRoutePathSegments({
     path,
     langTag: xDefaultLangTag,
     i18n,
@@ -55,7 +51,7 @@ export function createHreflangRouteMeta({
 
   langTags.forEach((langTag) => {
     const hreflang = langTagsConf?.[langTag]?.hreflang || langTag
-    const localizedPath = localizePathSegments({ path, langTag, i18n })
+    const localizedPath = localizeRoutePathSegments({ path, langTag, i18n })
 
     link[`hreflang-${hreflang}`] = {
       rel: 'alternate',

@@ -1,0 +1,20 @@
+* Qint Documentation
+
+** Introduction
+Qint is a library of functions and tools to help in internationalizing a Quasar
+app.
+
+Note: At the moment, Qint is supported only for typescript apps, so make sure your Quasar app has typescript enabled.
+
+** Quick Start
+#+begin_src sh
+quasar ext add @ejez/qint
+#+end_src
+
+
+** Installation
+To install Qint as an app extension, run:
+#+begin_src sh
+
+#+end_src
+
