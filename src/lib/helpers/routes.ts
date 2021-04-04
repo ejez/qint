@@ -12,12 +12,16 @@ export function localizeRoutePathSegments({
 }) {
   // blog => مدونة
   // blog/recent-posts => مدونة/مدونات-حديثة
-  return encodeURI(
-    path
-      .split('/')
-      .map((segment) => i18n.t(`ps.${segment}`, segment, { locale: langTag }))
-      .join('/')
-  )
+  return path
+    ? encodeURI(
+        path
+          .split('/')
+          .map((segment) =>
+            i18n.t(`ps.${segment}`, segment, { locale: langTag })
+          )
+          .join('/')
+      )
+    : ''
 }
 
 export function assignToRoute({

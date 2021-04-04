@@ -12,11 +12,11 @@
 </template>
 
 <script lang="ts">
-import { getAppMeta, getHost } from 'qint'
+import { getHost, useQintMeta } from 'qint'
 import type { QintLangTagsConf } from 'qint/types'
-import { defineComponent, PropType, ref, watch } from 'vue'
+import { defineComponent, PropType, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'QintLangTagSelector',
@@ -38,21 +38,17 @@ export default defineComponent({
       label: props.langTagsConf?.[langTag]?.nativeName || langTag,
       value: langTag,
     }))
-
+    const host = getHost()
     const router = useRouter()
-    const route = useRoute()
+    const qintMeta = useQintMeta()
 
-    const { locale } = useI18n()
-
-    const langTag = ref(locale.value)
+    const { locale: langTag } = useI18n()
 
     watch(langTag, async (langTag) => {
-      const appMeta = getAppMeta(route)
       const hreflang = props.langTagsConf?.[langTag]?.hreflang || langTag
-      const host = getHost()
 
       await router.push(
-        appMeta?.link?.[`hreflang-${hreflang}`]?.href?.replace(
+        qintMeta.value.link?.[`hreflang-${hreflang}`]?.href?.replace(
           `https://${host}` +
             (process.env.VUE_ROUTER_MODE === 'hash' ? '/#' : ''),
           ''

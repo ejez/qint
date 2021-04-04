@@ -1,15 +1,53 @@
 import type { QSsrContext } from '@quasar/app'
 import type { MetaOptions, MetaTagOptions } from 'quasar/dist/types/meta'
-import type { RouteLocationNormalizedLoaded } from 'vue-router'
 import { getHost, localizeRoutePathSegments } from '..'
 import type { QintI18n, QintLangTagsConf } from '../types'
 
-export function getAppMeta(route: RouteLocationNormalizedLoaded): MetaOptions {
-  const currentRouteRecord = route?.matched.find(
-    (routeRecord) => routeRecord.name === route.name
-  )
+export function createHreflangLink({
+  localizedPaths,
+  xDefaultLangTag,
+  langTagsConf,
+  ssrContext,
+}: {
+  localizedPaths: { [langTag: string]: string }
+  xDefaultLangTag: string
+  langTagsConf?: QintLangTagsConf
+  ssrContext?: QSsrContext | null
+}) {
+  if (!(xDefaultLangTag in localizedPaths)) {
+    return
+  }
 
-  return currentRouteRecord?.meta?.appMeta || {}
+  const link: MetaTagOptions = {}
+  const host = getHost(ssrContext)
+
+  link['herflang-x-default'] = {
+    rel: 'alternate',
+    hreflang: 'x-default',
+    href:
+      `https://${host}/` +
+      (process.env.VUE_ROUTER_MODE === 'hash' ? '#/' : '') +
+      xDefaultLangTag +
+      (localizedPaths[xDefaultLangTag]
+        ? '/' + localizedPaths[xDefaultLangTag]
+        : ''),
+  }
+
+  for (const [langTag, localizedPath] of Object.entries(localizedPaths)) {
+    const hreflang = langTagsConf?.[langTag]?.hreflang || langTag
+
+    link[`hreflang-${hreflang}`] = {
+      rel: 'alternate',
+      hreflang,
+      href:
+        `https://${host}/` +
+        (process.env.VUE_ROUTER_MODE === 'hash' ? '#/' : '') +
+        langTag +
+        (localizedPath ? '/' + localizedPath : ''),
+    }
+  }
+
+  return link
 }
 
 export function createHreflangRouteMeta({
@@ -29,40 +67,17 @@ export function createHreflangRouteMeta({
 }): MetaOptions {
   xDefaultLangTag = xDefaultLangTag || langTags[0]
 
-  const link: MetaTagOptions = {}
-
-  const host = getHost(ssrContext)
-
-  const xDefaultLocalizedPath = localizeRoutePathSegments({
-    path,
-    langTag: xDefaultLangTag,
-    i18n,
-  })
-
-  link['herflang-x-default'] = {
-    rel: 'alternate',
-    hreflang: 'x-default',
-    href:
-      `https://${host}/` +
-      (process.env.VUE_ROUTER_MODE === 'hash' ? '#/' : '') +
-      xDefaultLangTag +
-      (path ? '/' + xDefaultLocalizedPath : ''),
-  }
-
+  const localizedPaths: { [langTag: string]: string } = {}
   langTags.forEach((langTag) => {
-    const hreflang = langTagsConf?.[langTag]?.hreflang || langTag
-    const localizedPath = localizeRoutePathSegments({ path, langTag, i18n })
-
-    link[`hreflang-${hreflang}`] = {
-      rel: 'alternate',
-      hreflang,
-      href:
-        `https://${host}/` +
-        (process.env.VUE_ROUTER_MODE === 'hash' ? '#/' : '') +
-        langTag +
-        (path ? '/' + localizedPath : ''),
-    }
+    localizedPaths[langTag] = localizeRoutePathSegments({ path, langTag, i18n })
   })
 
-  return { link }
+  const link = createHreflangLink({
+    localizedPaths,
+    xDefaultLangTag,
+    langTagsConf,
+    ssrContext,
+  })
+
+  return link ? { link } : {}
 }
