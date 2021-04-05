@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "src/index.js",
   "scripts": {
-    "lint": "eslint --ext .js,.ts,.vue ./",
+    "lint": "eslint --ext .js,.ts,.vue ./src/lib/",
     "test": "echo \"No test specified\" && exit 0"
   },
   "devDependencies": {
