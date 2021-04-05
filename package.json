@@ -6,7 +6,22 @@
   "license": "MIT",
   "main": "src/index.js",
   "scripts": {
+    "lint": "eslint --ext .js,.ts,.vue ./",
     "test": "echo \"No test specified\" && exit 0"
+  },
+  "devDependencies": {
+    "@quasar/extras": "^1.10.2",
+    "core-js": "^3.6.5",
+    "quasar": "^2.0.0-beta.11",
+    "vue-i18n": "^9.0.0",
+    "@quasar/app": "^3.0.0-beta.10",
+    "@types/node": "^10.17.15",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-vue": "^7.0.0"
   },
   "repository": {
     "type": "git",
