@@ -4,7 +4,8 @@
   "description": "A Quasar app extension to add internationalization support.",
   "author": "Ejez <ejez@protonmail.ch>",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue ./src/lib/",
     "test": "echo \"No test specified\" && exit 0"
