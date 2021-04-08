@@ -147,11 +147,6 @@ corresponding "tld" defined.
           (lt) => langTagsConf?.[lt].tld === urlHost.split(':')[0]
         )
         if (langTag) return langTag
-      } else {
-        // Warn when the host is invalid.
-        console.warn(`
-[Qint getLangTag] "tld" mode: The URL host is empty or undefined.
-`)
       }
     }
   }
