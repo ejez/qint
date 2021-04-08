@@ -12,8 +12,9 @@
     "baseUrl": ".",
     "paths": {
       "qint": ["src/lib"]
-    }
+    },
+
+    "outDir": "dist"
   },
-  "include": ["src/lib/**/*"],
-  "outDir": "dist"
+  "include": ["src/lib/**/*"]
 }
