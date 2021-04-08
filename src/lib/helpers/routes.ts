@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
-import type { QintI18n } from '../types'
+import type { QintI18n } from 'qint'
 
 export function localizeRoutePathSegments({
   path,

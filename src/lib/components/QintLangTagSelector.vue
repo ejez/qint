@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { getHost, useQintMeta } from 'qint'
+import { getUrlHost, useQintMeta } from 'qint'
 import type { QintLangTagsConf } from 'qint/types'
 import { defineComponent, PropType, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -38,7 +38,7 @@ export default defineComponent({
       label: props.langTagsConf?.[langTag]?.nativeName || langTag,
       value: langTag,
     }))
-    const host = getHost()
+    const host = getUrlHost()
     const router = useRouter()
     const qintMeta = useQintMeta()
 

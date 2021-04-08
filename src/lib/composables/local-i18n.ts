@@ -2,7 +2,7 @@ import { watch } from 'vue'
 import type { ComposerOptions } from 'vue-i18n'
 import { useI18n } from 'vue-i18n'
 import { loadVueI18nMsg } from '..'
-import type { QintImportVueI18nMsgFn } from '../types'
+import type { QintImportVueI18nMsgFn } from 'qint'
 
 export function setupLocalI18n({
   importMsgFn,
