@@ -4,17 +4,17 @@
 
 import type { Cookies, QuasarLanguage } from 'quasar'
 import type {
-    ComposerOptions,
-    I18n,
-    LocaleMessageDictionary,
-    VueI18nOptions,
-    VueMessageType
+  ComposerOptions,
+  I18n,
+  LocaleMessageDictionary,
+  VueI18nOptions,
+  VueMessageType,
 } from 'vue-i18n'
 
 /**
  * Configuration for a language tag.
  */
-interface QintLangTagConf {
+export interface QintLangTagConf {
   /**
    * The native name of the language tag. (Can be used in the language tag
    * selector.)
@@ -57,7 +57,7 @@ interface QintLangTagConf {
 /**
  * App language tags configuration.
  */
-interface QintLangTagsConf {
+export interface QintLangTagsConf {
   [langTag: string]: QintLangTagConf
 }
 
@@ -65,7 +65,7 @@ interface QintLangTagsConf {
  * Configuration related to the structure of the app URLs with regard to
  * internationalization.
  */
-interface QintUrlConf {
+export interface QintUrlConf {
   /**
    * The mode of the app URL structure.
    *
@@ -144,7 +144,7 @@ interface QintUrlConf {
  * by Quasar.
  * @returns Promise that should resolve to a Quasar language pack.
  */
-type QintImportQLangFn = (
+export type QintImportQLangFn = (
   isoName: string,
   custom?: boolean
 ) => Promise<QuasarLanguage>
@@ -152,7 +152,7 @@ type QintImportQLangFn = (
 /**
  * Quasar language related configurations.
  */
-interface QintQuasarLangConf {
+export interface QintQuasarLangConf {
   /** A function to use for importing a Quasar language pack. */
   importQLang: QintImportQLangFn
 }
@@ -163,14 +163,14 @@ interface QintQuasarLangConf {
  * @param langTag - The language tag to import the message for.
  * @returns Promise that should resolve to a locale message.
  */
-type QintImportVueI18nMsgFn = (
+export type QintImportVueI18nMsgFn = (
   langTag: string
 ) => Promise<LocaleMessageDictionary<VueMessageType>>
 
 /**
  * vue-i18n related configurations.
  */
-interface QintVueI18nConf {
+export interface QintVueI18nConf {
   /**
    * Whether to use a composer (recommended) or a legacy vue-i18n instance
    * (default).
@@ -187,7 +187,7 @@ interface QintVueI18nConf {
 /**
  * Cookie related configurations.
  */
-interface QintCookieConf {
+export interface QintCookieConf {
   /**
    * Whether the language tag cookie is used.
    * If enabled, you need also to activate Quasar `Cookies` plugin in
@@ -201,7 +201,7 @@ interface QintCookieConf {
 /**
  * Qint configuration.
  */
-interface QintConf {
+export interface QintConf {
   /**
    * List of language tags to use in the app. It is recommended to use `BCP 47`
    * language tags.
@@ -234,10 +234,10 @@ interface QintConf {
 }
 
 /** Options to use for the language tag cookie. */
-type QintCookieOptions = Parameters<typeof Cookies.set>[2]
+export type QintCookieOptions = Parameters<typeof Cookies.set>[2]
 
 /** vue-i18n composer or legacy instance. */
-type QintI18n = I18n<unknown, unknown, unknown, boolean>['global']
+export type QintI18n = I18n<unknown, unknown, unknown, boolean>['global']
 
 /** Add Quasar ssr related types. */
 declare module 'quasar/dist/types/feature-flag' {
